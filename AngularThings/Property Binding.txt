@@ -3,7 +3,7 @@ TUDO ISSO PARA CRIAR UM BOTÃO QUE APÓS CARREGAR A PÁGINA IRÁ FICAR DISPONIVEL DE
 
 Na pasta SERVERS, servers.component.html
 
-<button class="btn btn-primary">Add Server</button>
+<button class="btn btn-primary">Add Server</button> //Cria um botão
 <app-server></app-server>
 <app-server></app-server>
 
@@ -31,11 +31,11 @@ Depois logo embaixo no
 })
 export class ServersComponent 
 
-allowNewServer = false;
+allowNewServer = false; //Cria a propriedade allowNewServer como um boolean
 
 constructor() {
- setTimeout(() => {
-     this.allowNewServer = true;
+ setTimeout(() => { //Isso é o mesmo que criar uma função para colocar o tempo que o botão vai levar para ficar disponível
+     this.allowNewServer = true; //Pega a propriedade allowNewServer e coloca para true depois de 2000 milisegundos, ou seja...2 segundos.
   }, 2000);
 }
 
@@ -49,6 +49,7 @@ Depois no servers.component.html
   [disabled]="!allowNewServer">Add Server</button>
 <app-server></app-server>
 <app-server></app-server>
+
 
 
 

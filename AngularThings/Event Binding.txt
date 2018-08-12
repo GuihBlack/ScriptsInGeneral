@@ -1,0 +1,54 @@
+No servers.component.ts
+
+export class ServersComponent...
+ allowNewServer = false;
+ serverCreationStatus = 'No Server was created!';  //Cria a propriedade serverCreationStatus
+
+
+
+Depois no servers.component.html comentar assim
+<!--p>{{ allowNewServer }}</p-->
+E depois logo embaixo
+
+<!--p>{{ allowNewServer }}</p-->
+<p>{{ serverCreationStatus }} </p>  //Chama a propriedade serverCreationStatus do servers.component.ts ("No server was created!")
+
+
+
+
+
+
+Depois no servers.component.ts
+
+Debaixo do ngOnInit(){
+}
+
+ OnCreateServer(){ //Isso Cria o evento em si
+   this.serverCreationStatus = 'Server was created!';  //Isso cria o método do evento que vai disparar "Server was created"
+ }
+}
+
+
+
+Depois no servers.component.html
+
+<button
+ class="btn btn-primary"
+ [disabled]="!allowNewServer"
+ (click)="onCreateServer()">Add Server</button>   //Vai chamar o Evento onCreaterServer após o click no botão Add Server
+<p>{{ serverCreationStatus }} </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

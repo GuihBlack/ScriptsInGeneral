@@ -1,0 +1,18 @@
+Com String Interpolation
+
+<button 
+class="btn btn-primary"
+[disabled]="!allowNewServer">Add Server</button>
+<p>{{ allowNewServer }}</p> //para pegar a propriedade tem que ter o {{ }}, assim vai mostrar o true e falso depois de 2 segundos.
+<app-server></app-server>
+<app-server></app-server>
+
+
+Com Property Binding
+
+<button 
+class="btn btn-primary"
+[disabled]="!allowNewServer">Add Server</button>
+<p> [innerText]="allowNewServer"</p>
+<app-server></app-server>
+<app-server></app-server>
