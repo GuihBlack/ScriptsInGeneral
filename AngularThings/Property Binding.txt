@@ -1,0 +1,51 @@
+TUDO ISSO PARA CRIAR UM BOTÃO QUE APÓS CARREGAR A PÁGINA IRÁ FICAR DISPONIVEL DEPOIS DE 2 SEGUNDOS.
+
+
+Na pasta SERVERS, servers.component.html
+
+<button class="btn btn-primary">Add Server</button>
+<app-server></app-server>
+<app-server></app-server>
+
+
+
+Depois no servers.component.ts, ir no template e comentar os dois app-server assim:
+
+       template:
+//	<app-server></app-server>
+//	<app-server></app-server>
+
+
+
+
+
+E pegar pela URL
+
+templateUrl: './servers.component.html',
+
+
+
+
+Depois logo embaixo no
+
+})
+export class ServersComponent 
+
+allowNewServer = false;
+
+constructor() {
+ setTimeout(() => {
+     this.allowNewServer = true;
+  }, 2000);
+}
+
+
+
+
+Depois no servers.component.html
+
+<button 
+  class="btn btn-primary"
+  [disabled]="!allowNewServer">Add Server</button>
+<app-server></app-server>
+<app-server></app-server>
