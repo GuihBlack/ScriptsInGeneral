@@ -1,0 +1,25 @@
+(1)Na pastar SERVER, No server.component.html
+
+
+<p>Server with ID ___ is ___</p>
+
+
+
+
+(2)Na pasta SERVER, Depois no server.component.ts
+
+
+
+debaixo do export class ServerComponent{
+
+ serverId = 10;   // O "serverId" vai ser nome da property(uma expressão em typescript)
+ serverStatus = 'offline'; // Mesma coisa para o serverStatus
+
+}
+
+
+
+
+(3)No server.component.html
+
+<p>{{ 'Server' }} with ID {{ serverId }} is {{ serverStatus}}</p>
