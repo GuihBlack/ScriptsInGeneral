@@ -11,9 +11,9 @@ Na pasta SERVERS, servers.component.html
 
 Depois no servers.component.ts, ir no template e comentar os dois app-server assim:
 
-       template:
+//       template:`
 //	<app-server></app-server>
-//	<app-server></app-server>
+//	<app-server></app-server>`
 
 
 
