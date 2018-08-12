@@ -1,0 +1,42 @@
+using UnityEngine;
+
+public class Flee : MonoBehaviour {
+
+	public Transform target;
+	Vector2 targetPos;
+
+	public float speed = 5;
+	public float mass = 20;
+	Vector2 position;
+	Vector2 velocity;
+
+	Vector2 desired_velocity;
+	Vector2 steering_velocity;
+
+	private void Update()
+	{
+		position = transform.position;
+		targetPos = target.position;
+
+		desired_velocity = ((Vector2)target.position - position).normalized * speed;
+
+		steering_velocity = desired_velocity - velocity;
+		steering_velocity = steering_velocity / mass;
+
+		velocity += steering_velocity;
+		
+		if (Vector2.Distance(position, targetPos) < 3f)
+		{
+			transform.position +=  -(Vector3)velocity * Time.deltaTime;
+		}
+
+		float angle = Mathf.Atan2(-velocity.y, -velocity.x) * Mathf.Rad2Deg;
+		transform.eulerAngles = new Vector3(0, 0, angle);
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere(position, 3f);
+	}
+}

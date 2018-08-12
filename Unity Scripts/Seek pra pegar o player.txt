@@ -1,0 +1,43 @@
+using UnityEngine;
+
+public class Seek : MonoBehaviour
+{
+	public float speed;
+	public float mass;
+
+	Vector2 position;
+	[HideInInspector] public Vector2 velocity = new Vector2(1,0);
+
+	public Transform target;
+	Vector2 targetPosition;
+	Vector2 desired_velocity;
+	Vector2 steering_velocity;
+
+	// =============================================================
+	private void Update()
+	{
+		position = transform.position;
+
+		if (target == null)
+			targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		else
+			targetPosition = target.position;
+
+		desired_velocity = (targetPosition - position).normalized * speed;
+
+		steering_velocity = desired_velocity - velocity;
+		steering_velocity = steering_velocity / mass;
+
+		velocity += steering_velocity;
+
+		transform.position = position + velocity * Time.deltaTime;
+
+		Rotate();
+	}
+
+	void Rotate()
+	{
+		float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+		transform.eulerAngles = new Vector3(0, 0, angle);
+	}
+}

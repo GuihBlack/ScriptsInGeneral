@@ -1,0 +1,202 @@
+Para criar novo app
+
+npm install g @angular/cli
+ng new my-dream-app
+cd my-dream-app
+ng serve
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Para abrir o app sempre que fechado
+cd my-first-app
+ng serve
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ctrl+c pra sair do cmd
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+src >>> app >>>
+
+app.component.html (Praticamente pra escrever as definições da página.) >>> Pode alterar tudo que estiver aqui dentro, 
+por exemplo no <h1> Welcome to {{ title }} ! </h1> pode colocar "VTNC" no welcome
+
+...Apagar tudo e seguir o número 1 do "HTML Significados"
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+app.component.css (Para fazer "styling" na página.) >>>
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+app.component.ts (Contém typescript, o que vai ser convertido em JavaScript.) >>> no title = "app", pode ser alterado para mudar
+diretamente o título da página que fica do lado do Welcome. Onde para puxar o Título que está no app.component.ts deve chamar a 
+classe título >>> {{ title }} <<<, assim aparecendo o que escreveu no title.
+
+Depois de seguir o "HTML Significados (1)", pode colocar no "title" a classe "name", assim vai digitar tudo depois do nome.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+app.module.ts (Fala pro Angular qual peças pertencem ao nosso APP.) >>>
+No topo, colocar um novo import para saber de onde pegar o arquivo.
+
+import { FormsModule } from '@angular/forms'; >>>> Isso praticamente está mostrando uma "linguagem nova" para o Angular, para ele
+saber ler o arquivo desejado.
+
+Na array debaixo, em imports colocar:
+
+imports: [
+BrowserModule,
+FormsModule  <<<<<<< O que acabamos de importar lá encima.
+],
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Bootstrap >>> USADO PARA STYLING, facilita muito, não tendo que usar o CSS toda hr.
+
+Como instalar:
+No terminal, usar ctrl+c para sair
+npm install --save bootstrap@3
+Procurar no "angular.json" pelo "styles", onde vai estar assim:
+"styles": [
+              "src/styles.css"
+],
+
+Adicionar então o --- "node_modules/bootstrap/dist/css/bootstrap.min.css/", --- para ficar assim
+
+"styles": [
+	       "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+],
+
+Agora só dar um ng serve para recarregar as configurações, e caso não de certo ainda, reiniciar o cmd, a página e o visual studio,
+SEMPRE ABRINDO COMO ADMIN!!!!
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+---Para criar um component---
+
+Criar uma nova pasta sendo uma sub-pasta da pasta app. Colocar o nome da pasta como o nome do seu componente, no caso "server".
+Dentro da pasta criar um novo arquivo chamado "server.component.ts" (NAO ESQUECER DE COLOCAR O "TS" para ser typescript !!!).
+
+***************************O que é um component??? ************************************************************
+Um component nada mais é que uma classe, uma classe de typescript, para o Angular instancia-la e criar objetos.
+
+***************************************************************************************************************
+
+No server >>> server.component.ts >>> seguir o "HTML Significados 2"
+
+Criar um novo arquivo chamado "server.component.html" na pasta "server".
+
+Na pasta app >>> app.component.html >>> seguir o "HTML Significados 2.1 e 2.2"
+
+No app.module.ts >>> adicionar um novo import (debaixo do import do AppComponent) >>>
+import {ServerComponent} from './server/server.component'; >>> NAO PRECISA ESPECIFICAR O CAMINHO INTEIRO,
+POIS COMO ESTÁ NO TYPESCRIPT, ELE SIMPLESMENTE MANDA UM "PACKAGE" PARA O ANGULAR SABER ONDE ESTÁ ARQUIVO X.
+
+Feito isso:
+@NgModule({ declarations >>> colocar o ServerComponent debaixo do AppComponent.
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+---Para criar um component com CLI Nest ---
+
+Abrir outro terminal >>> ng generate component servers OUUUUU ng g c servers
+Clicar em refresh 
+Vai ter um arquivo servers dentro do app
+Apagar o servers.component.spec.ts (serve pra teste)
+Abrir no servers >>> servers.component.html >>> Seguir o "HTML Significados 3"
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+---Para colocar um component debaixo do outro---
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+---Para colocar um warning alert---
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+---Para mudar o estilo dos components---
+
+Para colocar o texto mais para a direita, vá em >>> app.component.html >>> seguir "HTML Significados 4"
+
+Para mudar a cor do texto, vá em >>> app.component.css >>> seguir o "HTML significados 4.1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------

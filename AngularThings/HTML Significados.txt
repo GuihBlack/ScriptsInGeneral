@@ -1,0 +1,181 @@
+(*1*)
+
+<input type="text">  -------------- Para colocar um input na página onde vai ser digitado um texto.
+<p></p> ------------------ Isso é um parágrafo.
+<p>{{ name }} </p> -------------- vai pegar a classe "name" que vai estar em app.component.ts
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+[(ngModel)]="name"> -------------- Vai pegar a classe name que está no app.component.ts e traduzir para
+uma linguagem que o Angular entenda, por isso é adicionado o "ngModel", para carregar um Model específico 
+que está no app.module.ts
+
+
+(1)
+<input type="text" [(ngModel)]="name">
+<p>{{ name }}</p>
+
+(Bonus)
+Em app.component.ts
+Depois de seguir o "HTML Significados (1)", pode colocar no "title" a classe "name", assim vai digitar tudo depois do nome.
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+(*2*)
+
+export class ServerComponent {} -------------  Para exportar a classe para poder utiliza-la em outros components.
+@Component() --------------- É um decorator, serve para adicionar "buffs" na classe e nos elementos.
+selector: 'app-server', -------- É uma """tag""" do seu component, para poder utiliza-lo em outros components.
+templateUrl: './server.component.html' ---------- Colocar o caminho que vai usar o HTML.
+
+
+
+(2)
+
+import { Component } from '@angular/core';
+
+@Component({
+ selector: 'app-server',
+ templateUrl: './server.component.html'
+})
+export class ServerComponent {
+
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+(*2.1*)
+
+<hr> ------- Deixa uma linha horizontal
+
+(2.1)
+
+<p>The Server Component</p>
+
+(*2.2*)
+
+<app-server></app-server> É o selector do "app-server" adicionado no app.modules.ts e depois mostrando eles na página.
+
+(2.2)
+
+<p>The Server Component</p>
+<hr>
+<app-server></app-server>
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+(*3*)
+
+A criação do CLI vai fazer update nos modules automaticamente, mas é bom conferir para ver se o selector bate.
+
+Primeiro em app.module.ts >>> (TEM QUE TER) import { ServersComponent } from './servers/servers.component'; >>> (E Embaixo de @NgModule declarations tem que ter "Servers Component"
+
+
+Depois na pastar servers >>> servers.component.ts >>> (TEM QUE TER no selector) >>> 'app-servers',
+
+Depois no arquivo app.component.html >>> alterar o selector para <app-servers></app-servers>
+
+
+(3)
+
+<app-server></app-server>
+<app-server></app-server>
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+(*4*)
+
+Deixa o texto mais para a direita
+
+
+(4)
+
+
+<div class="container">
+ <div class="row">
+   <div class="col-xs-12">
+     <h3>I'm in the AppComponent!</h3>
+     <hr>
+     <app-servers></app-servers>
+   </div>
+  </div>
+</div>
+
+
+(*4.1*)
+
+Muda a cor do texto
+
+(4.1)
+
+h3 {
+ color: darkblue;
+}
+
+
+(4.2)
+
+Faz uma box de uma cor envolta do texto
+
+p{
+ padding: 20px;
+ background-color: palegreen;
+ border: 1px solid green;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

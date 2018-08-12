@@ -1,0 +1,83 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Wander : MonoBehaviour {
+
+	Vector2 targetPosition;
+
+	Vector2 position;
+	Vector2 velocity = new Vector2(1,0);
+	Vector2 desired_velocity;
+	Vector2 steering_velocity;
+
+	public float speed = 5;
+	public float mass = 20;
+
+	Vector2 displacement;
+
+	private void Start()
+	{
+		wander();
+	}
+
+	private void Update()
+	{
+		//ShowDebug();
+
+		position = transform.position;
+
+		desired_velocity = (targetPosition - position).normalized * speed;
+
+		steering_velocity = desired_velocity - velocity;
+		steering_velocity = steering_velocity / mass;
+
+		velocity = velocity + steering_velocity;
+
+		transform.position = position + velocity * Time.deltaTime;
+
+		float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+		transform.eulerAngles = new Vector3(0, 0, angle);
+	}
+
+	private void FixedUpdate()
+	{
+		RaycastHit2D hit = Physics2D.Raycast(position, transform.right, 2);
+		if (hit.collider)
+		{
+			targetPosition = -targetPosition;
+		}
+
+		//Debug.DrawLine(position, position + ((Vector2)transform.right * 2), Color.cyan);
+	}
+
+	void wander()  {
+		float wanderAngle = transform.eulerAngles.z + Random.Range(-120, 120);
+		displacement = GetVectorFromAngle(wanderAngle);
+
+		targetPosition = position + displacement * 10;
+
+		Invoke("wander", Random.Range(2,4));
+	}
+
+	Vector2 GetVectorFromAngle(float value) {
+		value = value * Mathf.Deg2Rad;
+		return new Vector2(Mathf.Cos(value), Mathf.Sin(value));
+	}
+
+	// =========================================================
+	private void OnDrawGizmos()
+	{
+		//Gizmos.DrawWireSphere(circleCenter, circleRadius);
+		Gizmos.color = Color.blue;
+		Gizmos.DrawWireSphere(targetPosition, 1);
+	}
+
+	void ShowDebug()
+	{
+		// diplacement
+		Debug.DrawLine(position, position + displacement, Color.red);
+		// velocity
+		Debug.DrawLine(position, position + velocity, Color.green);
+	}
+}

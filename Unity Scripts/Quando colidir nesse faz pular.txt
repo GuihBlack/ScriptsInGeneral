@@ -1,0 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Spring : MonoBehaviour {
+
+	public float force;
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		Rigidbody2D rb = collision.collider.GetComponent<Rigidbody2D>();
+		rb.AddForce(rb.transform.up * force);
+	}
+}

@@ -1,0 +1,24 @@
+ Color cor;
+    private void Start()
+    {
+        GetComponent<Renderer>().material.color = Random.ColorHSV();
+    }
+    private void Update()
+    {
+        
+        cor = GetComponent<Renderer>().material.color;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GetComponent<Renderer>().material.color = Random.ColorHSV();
+        collision.gameObject.GetComponent<Renderer>().material.color = cor;
+        CancelInvoke();
+        Invoke("ChangeColorBall", 0.1f);
+    }
+
+    void ChangeColorBall()
+    {
+        GetComponent<Renderer>().material.color = Random.ColorHSV(); ;
+    }
+}

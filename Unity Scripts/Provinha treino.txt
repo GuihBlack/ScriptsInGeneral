@@ -1,0 +1,12 @@
+Crie um eixo virtual chamado "FACENS" para Horizontal ser J e L
+
+- Coroutine
+Clock
+
+- Movimento
+- Seek
+- Flee
+- Pursue
+-Arrival
+
+

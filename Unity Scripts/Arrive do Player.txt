@@ -1,0 +1,60 @@
+using UnityEngine;
+
+public class Arrive : MonoBehaviour {
+
+	public Transform target;
+	Vector2 targetPos;
+
+	Vector2 position;
+	Vector2 velocity;
+	Vector2 desired_velocity;
+	Vector2 steering_velocity;
+
+	public float speed = 5;
+	public float mass = 20;
+
+	// area de frenagem
+	public float slowRadius = 3;
+	public float stopRadius = 0.2f;
+
+	private void Update()
+	{
+		position = transform.position;
+
+		if (!target)
+			targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		else
+			targetPos = target.transform.position;
+
+		float distance = Vector2.Distance(targetPos, position);
+
+		if (distance < stopRadius)
+		{
+			steering_velocity = Vector2.zero;
+			velocity = Vector2.zero;
+		}
+		else if (distance > slowRadius)
+		{
+			desired_velocity = (targetPos - position).normalized * speed;
+			steering_velocity = desired_velocity - velocity;
+			steering_velocity = steering_velocity / mass;
+		}
+		else {
+			desired_velocity = (targetPos - position).normalized * speed * (distance / slowRadius);
+			steering_velocity = desired_velocity - velocity;
+		}
+
+		velocity += steering_velocity;
+
+		transform.position += (Vector3)velocity * Time.deltaTime;
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.DrawWireSphere(targetPos, slowRadius);
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere(targetPos, stopRadius);
+	}
+
+
+}

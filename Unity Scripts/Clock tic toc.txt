@@ -1,0 +1,24 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Clock : MonoBehaviour {
+
+	public Text clock;
+	int time = 0;
+
+	private void Start()
+	{
+		StartCoroutine(ClockOn());
+	}
+
+	IEnumerator ClockOn()
+	{
+		while (true)
+		{
+			time++;
+			clock.text = time.ToString();
+			yield return new WaitForSeconds(1);
+		}
+	}
+}

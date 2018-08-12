@@ -1,0 +1,28 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GameManager : MonoBehaviour {
+
+	public static GameManager Instance;
+	public Text txtScore;
+	public Image imgWin;
+
+	private void Awake()
+	{
+		Instance = this;
+	}
+
+	public int score;
+
+	public void AddScore(int value)
+	{
+		score += value;
+		txtScore.text = "SCORE: " + score;
+	}
+
+	public void Win()
+	{
+		imgWin.gameObject.SetActive(true);
+		Time.timeScale = 0;
+	}
+}

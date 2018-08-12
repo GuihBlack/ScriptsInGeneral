@@ -1,0 +1,159 @@
+
+using UnityEngine;
+
+public enum EnumPlayerState
+{
+    IDLE,
+    JUMPING,
+    DOUBLE_JUMPING,
+    DUCK,
+    ATACK,
+    DUCK_LOCK
+}
+
+public class PlayerState2 : MonoBehaviour
+{
+
+    Rigidbody2D rb;
+    Animator animator;
+
+    public LayerMask mask;
+
+    public float moveForce;
+    public float jumpForce;
+
+    float hor;
+    RaycastHit2D hitFloor;
+    RaycastHit2D hitRoof;
+
+    public EnumPlayerState state;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+
+		state = EnumPlayerState.IDLE;
+	}
+
+    void Update()
+    {
+        hor = Input.GetAxis("Horizontal");
+
+        switch (state)
+        {
+            // ==============================================
+            case EnumPlayerState.IDLE:
+                UpdateIdle();
+
+                break;
+            // ==============================================
+            case EnumPlayerState.JUMPING:
+                UpdateJumping();
+
+                break;
+            // ==============================================
+            case EnumPlayerState.DOUBLE_JUMPING:
+                UpdateDouble();               
+
+                break;
+            // ==============================================
+            case EnumPlayerState.DUCK:
+				UpdateDuck();
+
+                break;
+            case EnumPlayerState.DUCK_LOCK:
+                if (!hitRoof)
+                {
+                    animator.SetBool("isDuck", false);
+                    state = EnumPlayerState.IDLE;
+                }
+                break;
+            case EnumPlayerState.ATACK:
+                if (hitFloor.collider)
+                {
+                    state = EnumPlayerState.IDLE;
+                }
+                break;
+        }
+
+        hitFloor = Physics2D.Linecast(transform.position, transform.position + (transform.up * -0.4f), mask);
+        Debug.DrawLine(transform.position, transform.position + (transform.up * -0.4f), Color.cyan);
+
+        hitRoof = Physics2D.Linecast(transform.position, transform.position + (transform.up * 1), mask);
+        Debug.DrawLine(transform.position, transform.position + (transform.up * 1), Color.green);
+    }
+
+
+	private void FixedUpdate()
+	{
+		rb.AddForce(transform.right * hor * moveForce);
+	}
+
+	// ================================================================
+	void UpdateIdle()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(transform.up * jumpForce);
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            animator.SetBool("isDuck", true);
+            state = EnumPlayerState.DUCK;
+        }
+
+        if (!hitFloor.collider)
+        {
+            state = EnumPlayerState.JUMPING;
+        }
+    }
+
+    void UpdateJumping()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(transform.up * jumpForce);
+            state = EnumPlayerState.DOUBLE_JUMPING;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            rb.AddForce(transform.up * jumpForce * -1);
+            state = EnumPlayerState.ATACK;
+        }
+
+        if (hitFloor.collider)
+        {
+            state = EnumPlayerState.IDLE;
+        }
+    }
+
+    void UpdateDouble()
+    {
+        if (hitFloor.collider)
+        {
+            state = EnumPlayerState.IDLE;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            rb.AddForce(transform.up * jumpForce * -2f);
+            state = EnumPlayerState.ATACK;
+        }
+    }
+
+	void UpdateDuck()
+	{
+		if (Input.GetKeyUp(KeyCode.C))
+		{
+			if (!hitRoof)
+			{
+				animator.SetBool("isDuck", false);
+				state = EnumPlayerState.IDLE;
+			}
+			else
+			{
+				state = EnumPlayerState.DUCK_LOCK;
+			}
+		}
+	}
+}

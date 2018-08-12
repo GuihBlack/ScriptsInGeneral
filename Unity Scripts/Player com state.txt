@@ -1,0 +1,51 @@
+using UnityEngine;
+
+enum PlayerState
+{
+    IDLE,
+    FLYING
+}
+
+public class Player : MonoBehaviour {
+
+	Rigidbody2D rb;
+	ParticleSystem particle;
+
+	public float jetForce;
+	public float forceRotation;
+	float hor;
+
+    PlayerState state = PlayerState.IDLE;
+
+	private void Start()
+	{
+		rb = GetComponent<Rigidbody2D>();
+		particle = GetComponentInChildren<ParticleSystem>();
+	}
+
+	private void Update()
+	{
+		if (Input.GetKey(KeyCode.W))
+		{
+			state = PlayerState.FLYING;
+
+			if (!particle.isEmitting)
+				particle.Play();
+		}
+		else if (Input.GetKeyUp(KeyCode.W))
+		{
+            state = PlayerState.IDLE;
+			particle.Stop();
+		}
+
+		hor = Input.GetAxis("Horizontal");
+	}
+
+	private void FixedUpdate()
+	{
+		if (state == PlayerState.FLYING)
+			rb.AddForce(transform.right * jetForce);
+
+		rb.AddTorque(forceRotation * hor *-1);
+	}
+}

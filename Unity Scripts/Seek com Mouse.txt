@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Seek : MonoBehaviour {
+
+    Vector2 target_position; // posição target
+    Vector2 position; // minha posição
+    Vector2 velocity; // minha velocidade atual
+    Vector2 desired_velocity; // velocidade desejada
+
+    Vector2 steering_velocity; // velocidade do steering(direção)
+
+    public float speed = 5; // quantidade de unidade que desejamos mover (rapidez)
+    public float mass = 20;
+
+    private void Update()
+    {
+        position = transform.position;
+        target_position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        desired_velocity = (target_position - position).normalized * speed;
+
+        steering_velocity = desired_velocity - velocity;
+
+        steering_velocity = steering_velocity / mass;
+
+        velocity = desired_velocity;
+
+
+        if(!Input.GetMouseButton(0))
+        transform.position = position + velocity * Time.deltaTime;
+
+        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+
+        transform.eulerAngles = new Vector3(0, 0, angle);
+
+    }
+}

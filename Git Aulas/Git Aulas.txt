@@ -1,0 +1,192 @@
+git config --global user.name "DevMasterTeam"
+
+git config --global user.email "devmasterteam@gmail.com"
+
+git config --global -- list (aparece as configurações)
+
+dir -a (força a listagem de todos os repositorios)
+
+git init (inicializa um repositorio vazio)
+
+(1)
+----- 'Criar txt readme' --- "escrever readme" nele -----
+----- 'dir -a' vai mostrar o readme.txt ------
+----- 'git init' -----
+
+mostrar que o arquivo esta sendo rastreado
+
+git status(mostra os arquivos que vc nao deu commit ou rastreou)
+
+git add readme.txt (rastreia o arquivo)
+
+git add --all (rastreia todos os arquivos)
+
+git commit -m "Versionamento Inicial" (faz commit no arquivo, o " -m" é pra fazer comentario)
+
+(2)
+
+----- 'Fazer alteração no texto readme' ----- " readme - updated."
+----- 'git status' -----
+----- 'git add --all -----
+----- 'git commit -m "Alteração de conteúdo" -----
+----- 'git log' Vai mostar historico de alterações feitas nos arquivos, versões etc -----
+----- 'git diff' ----- copiar commit debaixo, copiar commit de cima ----- (compara os commits)
+
+
+
+(APERTAR Q OU 'SHIFT + Q' para sair) <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+----- 'git log --stat' vai mostar o que foi alterado nos commits ----- 
+
+(3) 
+----- 'git checkout' retorna pra versão anterior do commit para checar bugs ----- copiar commit que quer ver a versao e colar do lado -----
+----- 'git checkout master' volta pro estado de head da master -----
+
+
+(4)
+----- apagar txt e adicionar outros arquivos -----
+----- 'git status' -----
+----- 'git add.all' -----
+----- 'git status' -----
+----- 'git commit -m' "Criacao do projeto" -----
+----- 'git status' -----
+----- 'git log' -----
+----- 'clear' limpa o cmd -----
+----- 'alterar arquivos' -----
+----- 'git status' -----
+----- 'git checkout index.html' pega um arquivo modificado e volta pra versao original do commit (no caso o index.html) -----
+----- '
+----- 'git reset --hard' pega todos os arquivos modificados e volta pra versao original do commit -----
+
+(5)
+----- fazer varias copias no index na pasta -----
+----- 'git status' -----
+----- 'git reset --hard' -----
+----- 'git status' -----
+----- você vai perceber que o git reset--hard nao funciona nesse caso, pois os arquivos copiados nao foram mapeados(rastreados), assim nao podendo ser alterados. -----
+----- 'git clean -n' mostra a lista de itens que podem ser apagados -----
+----- 'git clean -f' apaga todos os itens que nao estao mapeados -----
+----- criar dnv as copias -----
+----- 'git clean -i' pode selecionar os arquivos que deseja apagar pelos numeros que irao aparecer, filtrar, etc. -----
+----- basta selecionar a letra AZUL de cada coisa que deseja fazer. -----
+----- depois de selecionar os arquivos, apertar enter sem escrever nada. -----
+----- agora só escolher a opção clean -----
+
+
+(6)
+----- Para ignorar arquivos NAO RASTREADOS -----
+----- Criar arquivo txt alterando a extensão para '.gitignore.' e outra 'doc.java'. -----
+----- 'git status' -----
+----- Abrir arquivo java e adicionar no texto ' *.java' para ignorar todos os arquivos .java -----
+----- Abrir arquivo java e adicionar no texto ' *.html' para ignorar todos os arquivos .html -----
+
+----- Para ignorar arquivos RASTREADOS -----
+----- Tera que removar os arquivos para o GIT saber qual arquivo rastrear e qual vai ignorar -----
+----- 'git rm -r --cached . ' vai remover os arquivos do rastreamento -----
+----- git add --all -----
+----- git status -----
+----- git commit -m "Arrumando arquivos que nao devem ser versionados."
+----- git status -----
+----- Agora vc pode alterar a vontade o arquivo nao rastreado, pois ele nao estara mais no git.
+ 
+
+
+(7)
+----- Clonar arquivo -----
+----- Criar nova pasta de repositorio em outro local -----
+----- Abrir o arquivo com git.bash -----
+----- Colocar o endereço do arquivo no git que deseja passar os arquivos 'Git clone D:\git\Aula Logica JS' -----
+----- 'cd git' Para entrar na pasta -----
+ 
+
+
+GITHUB
+
+(1) Fazer um 'git clone e o endereço do repositorio do github, exemplo: git clone https://github.com/GuihBlack/CursoGitCompleto.git
+(2) cd CursoGitCompleto/  ------ o "CursoGitCompleto" no caso é o nome da pasta criada no pc
+(3) git status
+(4) git add --all ou git add arquivo.txt
+(5) git commit -m "Versionamento Inicial"
+(6) git status
+(7) git push "para poder fazer upload na nuvem do Github"
+(8) no site abrir o arquivo criado "test.txt"
+(9) editar arquivo clicando no lapiz do lado direito
+(10) fazer alterações e fazer um commit no final da página.
+(11) git pull "vai baixar as ultimas versões do git no site"
+(12) mais um git pull para conferir.
+
+GIT BUCKET (mesma coisa que GitHub, porém os arquivos ficam privados gratuitamente)
+
+
+Criando BRANCH
+
+(1)git branch develop -----  o "develop" no caso é o nome da branch
+(2)git branch ----- mostra todas as branchs 
+(3)git checkout develop ----- muda de "master" para "develop"
+(4)git status
+(5)adicionar arquivos na pasta
+(6)git add --all
+(7)git status
+(8)git commit -m "Criação do Site"
+(9)git push -u origin develop ----- Vai criar no site do github o branch e mandar os arquivos para o servidor
+
+Renomear Branch
+
+(1)git checkout -b super-funcionalidade ---- wtf?
+(2)git branch -m super-funcionalidade super-func
+(3)git checkout develop
+(4)git branch -m super-func super-funcionalidade
+(5)git branch
+(6)git checkout super-funcionalidade
+(7)git push -u origin super-funcionalidade ----- ai criar no site do github o branch e mandar os arquivos para o servidor
+(8)git pull ----- pra checar se ta tudo ok a versão
+(9)git branch -m super-func
+(10)git push origin --delete super-funcionalidade ----- para deletar o super-funcionalidade do servidor
+(11)git push -u origin super-func
+
+Mesclando Alterações
+
+(1)git checkout master
+(2)git merge develop
+(3)git status
+(4)git push
+(5)git branch
+(6)git branch -d develop (vai apagar a branch que nao quero mais)
+(7)git branch (mostra todas as branchs locais)
+(8)git branch -r (mostra todas as branchs do servidor)
+(9)git branch -a (mostra todas as branchs locais e do servidor)
+(10git checkout develop (vai baixar e atualizar tudo ja)
+
+
+Resolvendo Conflitos
+
+(1)git status
+(2)git pull
+(3)abrir o arquivo que esta tendo conflito
+(4)alterar o arquivo, excluindo o que vc nao quer e o deixando e salvando o que quer.
+(5)git status
+(6)git add --all
+(7)git commit -m "Resolução de Conflitos"
+(8)git push
+
+
+Git Stash (Salva o arquivo em uma pilha, assim podendo fechar o git sem dar commit)
+
+(1)Git status
+(2)git stash
+(3)git stash list
+(4)git status
+(5)git stash apply
+(6)git stash list
+(7)git stash drop
+
+Git Alias(cria atalhos de palavras)
+
+(1)Git config --global alias.st status --------------- o "st" é o atalho para o comando "status" no caso
+(2)git st
+(3)git config --global --unset alias.st -------------- Vai remover o atalho especificado
+(4)git st (so pra checar se apagou msm o atalho)
+(5)git config --regexp alias (lista todos os atalhos)

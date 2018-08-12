@@ -1,0 +1,65 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class Pursue : MonoBehaviour {
+
+	public GameObject target;
+	Vector2 targetPos;
+	Seek targetSeek;
+
+	Vector2 position;
+	Vector2 velocity = new Vector2(1,0);
+	Vector2 desired_velocity;
+	Vector2 steering_velocity;
+
+	public float speed = 5;
+	public float mass = 20;
+
+	Vector2 newTargetPos;
+
+	private void Start()
+	{
+		targetSeek = target.GetComponent<Seek>();
+	}
+
+	private void Update()
+	{
+		position = transform.position;
+		targetPos = target.transform.position;
+
+		newTargetPos = GetTargetFuturePosition();
+		desired_velocity = (newTargetPos - position).normalized * speed;
+
+		steering_velocity = desired_velocity - velocity;
+		steering_velocity = steering_velocity / mass;
+
+		velocity += steering_velocity;
+
+		transform.position = position + velocity * Time.deltaTime;
+
+		float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+		transform.eulerAngles = new Vector3(0, 0, angle);
+	}
+
+	Vector2 GetTargetFuturePosition()
+	{
+		if (targetSeek.velocity.magnitude > 0.5f)
+		{
+			float distance = Vector2.Distance(targetPos, position);
+			float T = distance / speed;
+			return targetPos + targetSeek.velocity * T;
+		}
+		else
+			return transform.position;
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere(newTargetPos, 0.5f);
+	}
+
+
+}

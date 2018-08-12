@@ -1,0 +1,29 @@
+using UnityEngine;
+
+public class SpawnManager : MonoBehaviour {
+
+	public GameObject[] enemy;
+	public GameObject player;
+
+	private void Start()
+	{
+		Spawn();
+	}
+
+	void Spawn()
+	{
+		Vector2 pos = Random.insideUnitCircle * Random.Range(5,10);
+
+		Seek seek =	Instantiate(enemy[Random.Range(0, enemy.Length)], pos, Quaternion.identity).GetComponent<Seek>();
+		seek.target = player.transform;
+		seek.speed = Random.Range(2, 5);
+		seek.mass = Random.Range(10, 40);
+
+		Invoke("Spawn", 2);
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.DrawWireSphere(new Vector3(0, 0, 0), 10);
+	}
+}

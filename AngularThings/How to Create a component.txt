@@ -1,0 +1,72 @@
+(1) Criar uma nova pasta no app
+Criar 3 novos arquivos, sendo: 
+
+nome-do-arquivo.component.css 
+nome-do-arquivo.component.html
+nome-do-arquivo-ts
+
+
+
+
+
+(2) No nome-do-arquivo.component.ts, colocar:
+
+import { Component } from '@angular/core';
+
+@Component({
+ selector: 'app-nome-do-arquivo', //Isso é a tag para ser chamdo no nome-do-arquivo.component.html
+ templateUrl:'./nome-do-arquivo.component.html',
+ styleUrls: ['./nome-do-arquivo.component.css']
+})
+export class NomeDoArquivoComponent { //Isso é tag para ser chamdo no app.module.ts
+
+}
+
+
+
+
+
+
+(3) No nome-do-arquivo.component.html, colocar:
+
+<p>Esse é o nome do arquivo.</p>
+
+No nome-do-arquivo.component.css, colocar:
+
+p{
+    padding: 20px;
+    background-color: violet;
+    border: 1px solid darkviolet;
+   }
+
+
+
+
+
+
+(4) No app.component.html, colocar:
+
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>This is my component title.</h3>
+        <hr>
+        <app-nome-do-arquivo></app-nome-do-arquivo>
+      </div>
+     </div>
+   </div>
+
+
+
+
+
+
+
+(5)No app.module.ts, colocar:
+
+import{ NomeDoArquivoComponent} from './nome-do-arquivo/nome-do-arquivo.component';
+
+
+@NgModule({
+ declarations: [
+   NomeDoArquivoComponent
