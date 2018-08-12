@@ -49,3 +49,7 @@ Depois no servers.component.html
   [disabled]="!allowNewServer">Add Server</button>
 <app-server></app-server>
 <app-server></app-server>
+
+
+
+Se por algum motivo nao funcionar, mudar o tempo e colocar 2000 dnv (WTF)
