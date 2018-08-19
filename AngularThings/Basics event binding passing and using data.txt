@@ -1,0 +1,47 @@
+No servers.component.html...
+
+<label>Server</label>
+<input                                    <!--criou um input simples para texto -->
+ type="text"
+ class="form-control"		          <!--Simplesmente ajusta o tamanho da fonte e do display para todas as telas que forem acessar com resolução diferente -->
+ (input)="onUpdateServerName($event)">    <!--vai pegar a propriedade input criado acima e disparar a cada "keystroke" que for digitado no input -->
+<p>{{ serverName }}</p>
+<button
+ class="btn btn-primary"
+ [disabled]="!allowNewServer"
+ (click)="onCreateServer()">Add Server</button>
+<p>{{ serverCreationStatus }}</p>
+<app-server></app-server>
+<app-server></app-server>
+
+
+
+
+
+
+
+No servers.component.ts...
+
+export class ServersComponent implements OnInit {
+allowNewServer = false;
+serverCreationStatus = 'No server was created!';
+serverName = '';                                
+
+
+
+
+
+
+ngOnInit(){
+}
+
+
+OnCreateServer(){
+this.serverCreationStatus = "Server was created!";
+}
+
+
+onUpdateServerName(event:Event){
+this.serverName = (<HTMLInputElement>)event.target).value;  <!--Vai pegar o empty string criado acima para substituir pelo elemento que o cidadão digitar no textInput. --> 
+ }							    <!--O HTMLInputElement server pro typescript reconhecer o elemento que vai ser digitado na página HTML.
+}
