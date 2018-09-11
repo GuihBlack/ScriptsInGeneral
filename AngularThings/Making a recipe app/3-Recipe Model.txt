@@ -1,0 +1,82 @@
+No recipes, criar um arquivo recipe.model.ts, dentro dele então...
+
+
+export class Recipe {
+    public name: string;
+    public description: string;
+    public imagePath: string;
+
+    constructor(name: string, desc: string, imagePath: string){
+        this.name = name;
+        this.description = desc;
+        this.imagePath = imagePath;
+    }
+}
+
+
+
+
+
+
+
+
+Depois no recipes-list, recipe-list-component.ts
+
+
+
+
+
+
+import { Component, OnInit } from '@angular/core';
+
+import { Recipe} from '../recipe.model';
+
+@Component({
+  selector: 'app-recipe-list',
+  templateUrl: './recipe-list.component.html',
+  styleUrls: ['./recipe-list.component.css']
+})
+export class RecipeListComponent implements OnInit {
+  recipes: Recipe[] = [
+    new Recipe('A test recipe', 'This is a simply a test', 'https://hips.hearstapps.com/del.h-cdn.co/assets/18/06/1600x800/landscape-1517928338-delish-mongolian-ramen-and-meatballs-still001.jpg?resize=640:*')
+  ];
+  
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+
+
+
+
+
+
+
+Depois no recipes-list-component.html
+
+
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-sucess">New Recipe</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <a href="#" class="list-group-item clearfix">
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">Recipe Name</h4>
+        <p class="list-group-item-text">Description</p>
+      </div>
+      <span class="pull-right">
+        <img src="" alt="" class="img-responsive" style="max-height: 50px;">
+      </span>
+    </a>
+      <app-recipe-item></app-recipe-item>
+  </div>
+</div>

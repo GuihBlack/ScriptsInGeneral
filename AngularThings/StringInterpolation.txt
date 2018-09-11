@@ -23,3 +23,22 @@ debaixo do export class ServerComponent{
 (3)No server.component.html
 
 <p>{{ 'Server' }} with ID {{ serverId }} is {{ serverStatus}}</p>
+
+
+
+
+
+
+(4)No server.component.html
+<p>{{ 'Server' }} with ID {{ serverId }} is {{ getServerStatus() }}</p>
+
+
+(5)No server.component.ts
+export class ServerComponent{
+ serverId = 10;
+ serverStatus = 'offline';
+
+ getServerStatus(){
+    return this.serverStatus;
+  }
+}

@@ -1,0 +1,23 @@
+no servers.component.html
+
+
+<!-- <p>{{ serverCreationStatus}}</p> -->
+<p *ngIf="serverCreated">Server was created, server name is {{ serveName }}</p>
+<app-server></app-server>
+<app-server></app-server>
+
+
+no server.component.ts
+
+
+export class ServersComponent implements OnInit {
+allowNewServer = false;
+serverCreationStatus = 'No server was created!';
+serverName = 'TestServer';
+serverCreated = false;
+
+
+onCreateServer(){
+    this.serverCreated = true;
+    this.serverCreationStatus = 'Server was created! Server name is ' + this.serverName;
+  }

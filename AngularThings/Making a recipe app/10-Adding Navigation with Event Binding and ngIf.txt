@@ -1,0 +1,106 @@
+No header, header.component.html
+
+<nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">Recipe Book</a>
+                </div>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#" (click)="onSelect('recipe')">Recipes</a></li>
+                        <li><a href="#" (click)="onSelect('shopping-list')">Shopping List</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" role="button">Manage<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Save Data</a></li>
+                                <li><a href="#">Fetch Data</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div> 
+        </div>
+</nav>
+
+
+
+
+
+
+No header.component.ts
+
+
+
+import { Component, EventEmitter, Output } from '@angular/core';
+
+@Component({
+    selector: 'app-header',
+    templateUrl: './header.component.html'
+})
+
+export class HeaderComponent {
+    @Output() featureSelected = new EventEmitter<string>();
+    
+    onSelect(feature: string){
+        this.featureSelected.emit(feature);
+    }
+}
+
+
+
+
+
+No app.component.html
+
+
+<app-header (featureSelected)="onNavigate($event)"></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <app-recipes></app-recipes>
+      <app-shopping-list></app-shopping-list>
+    </div>
+  </div>
+</div>
+
+
+
+No app.component.ts
+
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  loadedFeature = 'recipe';
+
+  onNavigate(feature:string){
+    this.loadedFeature = feature;
+  }
+}
+
+
+
+No app.component.html
+
+<app-header (featureSelected)="onNavigate($event)"></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <app-recipes *ngIf="loadedFeature === 'recipe'"></app-recipes>
+      <app-shopping-list *ngIf="loadedFeature !== 'recipe'"></app-shopping-list>
+    </div>
+  </div>
+</div>
+
+
+
+
+

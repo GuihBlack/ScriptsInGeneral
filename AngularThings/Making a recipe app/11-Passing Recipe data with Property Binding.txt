@@ -1,0 +1,85 @@
+No recipe-list, recipe-list.component.hmtml
+
+Recortar este
+
+<a 
+    href="#" 
+    class="list-group-item clearfix"
+    *ngFor="let recipe of recipes">
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
+        <p class="list-group-item-text">{{ recipe.description }}</p>
+      </div>
+      <span class="pull-right">
+        <img 
+        src="{{ recipe.imagePath }}" 
+        alt="{{ recipe.name }}" 
+        class="img-responsive" 
+        style="max-height: 50px;">
+      </span>
+</a>
+
+
+
+E colar no recipe-item, recipe-item.component.html
+
+
+
+
+Depois recortar o *ngFor="let recipe of recipes" e colar no recipe-list.component.html, assim
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-sucess">New Recipe</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+      <app-recipe-item *ngFor="let recipe of recipes"></app-recipe-item>
+  </div>
+</div>
+
+
+
+
+No recipe-item.component.ts
+
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Recipe } from '../../recipe.model';
+
+@Component({
+  selector: 'app-recipe-item',
+  templateUrl: './recipe-item.component.html',
+  styleUrls: ['./recipe-item.component.css']
+})
+export class RecipeItemComponent implements OnInit {
+  @Input() recipe: Recipe;
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+
+
+No recipe-list.component.html
+
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-sucess">New Recipe</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+      <app-recipe-item 
+      *ngFor="let recipeElement of recipes"
+      [recipe]="recipeElement"></app-recipe-item>
+  </div>
+</div>
+
+

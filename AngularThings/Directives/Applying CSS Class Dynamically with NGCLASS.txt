@@ -1,0 +1,19 @@
+No server.component.html
+
+<p [ngStyle]="{backgroundColor: getColor()}"
+    [ngClass]="{online: serverStatus === 'online'}">
+    {{ 'Server' }} with ID {{ serverId }} is {{ getServerStatus() }}
+</p>
+
+
+No server.component.ts
+
+import { Component } from '@angular/core';
+@Component({
+    selector: 'app-server',
+    templateUrl: './server.component.html',
+    styles: [`
+    .online {
+        color:white;
+    }
+    `]

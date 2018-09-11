@@ -1,0 +1,48 @@
+No shopping-list, shopping-list.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+
+import { Ingredient } from '../shared/ingredient.model';
+
+@Component({
+  selector: 'app-shopping-list',
+  templateUrl: './shopping-list.component.html',
+  styleUrls: ['./shopping-list.component.css']
+})
+export class ShoppingListComponent implements OnInit {
+  ingredients: Ingredient[] = [
+    new Ingredient('Apples', 5),
+    new Ingredient('Tomatoes', 10)
+  ];
+
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+
+
+
+
+
+No shopping-list.component.hmtl
+
+<div class="row">
+  <div class="col-xs-10">
+    <app-shopping-edit></app-shopping-edit>
+    <hr>
+    <ul class="list-group">
+      <a 
+      class="list-group-item" 
+      style="cursor: pointer"
+      *ngFor="let ingredient of ingredients"
+      >
+       {{ ingredient.name }} ({{ ingredient.amount}})
+    </a>
+    </ul>
+  </div>
+</div>

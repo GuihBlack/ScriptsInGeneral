@@ -1,0 +1,23 @@
+No servers.component.ts
+
+
+export class ServersComponent implements OnInit {
+allowNewServer = false;
+serverCreationStatus = 'No server was created!';
+serverName = 'TestServer';
+serverCreated = false;
+servers = ['TestServer', 'TestServer 2'];
+
+
+ onCreateServer(){
+    this.serverCreated = true;
+    this.servers.push(this.serverName);
+    this.serverCreationStatus = 'Server was created! Server name is ' + this.serverName;
+  }
+
+
+
+No servers.component.html
+
+<p *ngIf="serverCreated">Server was created, server name is {{ serverName }}</p>
+<app-server *ngFor="let server of servers"></app-server>
